@@ -1,0 +1,69 @@
+<!doctype html>
+<html ng-app="quicklist" ng-controller="listController">
+	<head>
+		<meta name="viewport" content="width=device-width">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<title ng-bind="getListName()">quicklist</title>
+	    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+	    <script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	    <script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>		
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.js"></script>
+		<script src="https://rawgithub.com/angular-ui/ui-sortable/angular1.2/src/sortable.js"></script>
+		<script src="https://cdn.firebase.com/js/client/1.0.2/firebase.js"></script>
+		<script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>		
+		<script src="http://qlist.cc/js/angular-linkify.min.js"></script>
+		<script src="http://qlist.cc/js/fastclick.js"></script>
+		<script src="http://qlist.cc/js/placeholders.min.js"></script>
+		<script src="http://qlist.cc/js/quicklist.js"></script>
+		<script src="http://qlist.cc/js/idHelper.js"></script>
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/reset.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48582921-2', 'qlist.cc');
+  ga('send', 'pageview');
+
+</script>
+	</head>
+	<body>
+		<div class="viewport">
+			<div class="main">
+				<header ng-show="loaded">
+					<input name="titleBox" class="titleBox" type="text" ng-model="listName.$value" ng-change="setListName()" placeholder="{{defaultProductName}}">
+					<div class="subtitle" ng-show="getListName()==defaultProductName && loaded" ng-cloak> 
+						sharable, disposable lists. save or share your list's url!
+					</div>
+				</header>
+				<form name="addItemForm" ng-submit="addItem()" ng-show="loaded">
+					<input name="addItemBox" class="addItemBox" type="text" required ng-model="itemName" placeholder="enter your {{fbCount(items) && 'next' || 'first'}} item" ng-pattern="moreThanWhitespace" />
+					<input class="addItemButton" type="submit" value="add" />
+				</form>
+				<div class="spinner" ng-hide="loaded">
+					<i class="fa fa-spinner fa-spin fa-3x"></i>					
+				</div>
+				<ul ui-sortable="" ng-model="items">
+					<li ng-class="{'listItem': true, 'checkedItem': item.checked}" ng-repeat="item in items">
+						<div class="checkboxLeft" ng-click="checkItem(item)" ></div>
+						<div class="checkbox" ng-click="checkItem(item)" >
+							<!-- font awesome checkbox icons -->
+							<i ng-class="{'fa': true, 'fa-check-square-o': item.checked, 'fa-square-o': !item.checked, 'fa-lg': true}"></i>
+						</div>
+						<div class="listItemName">
+							<span class="listItemNameContent" linkify>{{item.name}}</span> 
+							<div class="deleteButton" ng-click="deleteItem(item.ID)" ng-show="item.checked">	
+							<!-- font awesome x icon -->
+							<i class="fa fa-times-circle fa-lg"></i> 
+							</span>
+						</div>					
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
