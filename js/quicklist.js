@@ -3,14 +3,7 @@ window.addEventListener('load', function() {
     FastClick.attach(document.body);
 }, false);
 
-angular.module("quicklist", ["firebase", "linkify", "ui"])
-
-    .factory("list", ["$firebase", function($firebase) {
-        getListID();
-        var ref = new Firebase("https://qwiklist.firebaseio.com/lists/" + getListID());
-        return $firebase(ref);
-    }])
-
+angular.module("quicklist", ["firebase", "linkify", "ui.sortable"])
 
     .factory("listName", ["$firebase", function($firebase) {
         getListID();
@@ -18,21 +11,25 @@ angular.module("quicklist", ["firebase", "linkify", "ui"])
         return $firebase(ref);
     }])
 
-    .controller("listController", ["$scope", "list", "listName",
-        function($scope, list, listName) {
-            $scope.items = list;
+    .controller("listController", ["$scope", "$firebase", "listName",
+        function($scope, $firebase, listName) {
+            getListID();
+            var listsRef = new Firebase("https://qwiklist.firebaseio.com/lists/" + getListID());
+            $scope.items = $firebase(listsRef);
             $scope.listName = listName;
-            //$scope.titleText = getListName();
             $scope.loaded = false;
-
 
             //form validation pattern: http://stackoverflow.com/a/18747273
             $scope.moreThanWhitespace = /\S/;
             $scope.defaultProductName = "quicklist";
 
+            $scope.sortableOptions = {
+                disabled: false
+            };
+
             $scope.addItem = function() {
                 if ($scope.addItemForm.addItemBox.$valid) {
-                    $scope.items.$add({ID: $scope.nextItemID(), name: $scope.itemName, checked: false});
+                    listsRef.child($scope.nextItemID()).setWithPriority({ID: $scope.nextItemID(), name: $scope.itemName, checked: false}, $scope.nextPriority());
                 }
                 $scope.itemName = "";
             };
@@ -78,6 +75,18 @@ angular.module("quicklist", ["firebase", "linkify", "ui"])
                 return maxItemID + 1;
             };
 
+            $scope.nextPriority = function() {
+                var maxPriority = 0;
+                var keys = $scope.items.$getIndex();
+
+                keys.forEach(function (key, i) {
+                    if($scope.items[key].$priority > maxPriority) {
+                        maxPriority = $scope.items[key].$priority;
+                    }
+                });
+                return maxPriority + 1;
+            };
+
             $scope.fbCount = function(list) {
                 var count = 0;
                 var keys = list.$getIndex();
@@ -89,6 +98,3 @@ angular.module("quicklist", ["firebase", "linkify", "ui"])
             };
         }
     ]);
-
-
-

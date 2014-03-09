@@ -116,9 +116,20 @@ form {
 .listItemName {
 	display: inline-block;
 	font-size: large;
-	width: 80%;
+	width: 70%;
 }
 
+.listItemName a {
+	color: #666;
+}
+
+.checkedItem a {
+	color: #ccc;
+}
+
+.listItemName a:hover {
+	text-decoration: underline;
+}
 .listItemNameContent {
 	font-size: inherit;
 	white-space: pre-wrap;      /* CSS3 */   

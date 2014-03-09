@@ -9,9 +9,9 @@
 	    <script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>		
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.js"></script>
-		<script src="https://rawgithub.com/angular-ui/ui-sortable/angular1.2/src/sortable.js"></script>
+		<script src="http://qlist.cc/js/sortable.js"></script>
 		<script src="https://cdn.firebase.com/js/client/1.0.2/firebase.js"></script>
-		<script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>		
+		<script src="https://cdn.firebase.com/libs/angularfire/0.7.0/angularfire.min.js"></script>		
 		<script src="http://qlist.cc/js/angular-linkify.min.js"></script>
 		<script src="http://qlist.cc/js/fastclick.js"></script>
 		<script src="http://qlist.cc/js/placeholders.min.js"></script>
@@ -47,15 +47,15 @@
 				<div class="spinner" ng-hide="loaded">
 					<i class="fa fa-spinner fa-spin fa-3x"></i>					
 				</div>
-				<ul ui-sortable="" ng-model="items">
-					<li ng-class="{'listItem': true, 'checkedItem': item.checked}" ng-repeat="item in items">
+				<ul ui-sortable="sortableOptions" ng-model="items">
+					<li ng-class="{'listItem': true, 'checkedItem': item.checked}" ng-repeat="item in items | orderByPriority">
 						<div class="checkboxLeft" ng-click="checkItem(item)" ></div>
 						<div class="checkbox" ng-click="checkItem(item)" >
 							<!-- font awesome checkbox icons -->
 							<i ng-class="{'fa': true, 'fa-check-square-o': item.checked, 'fa-square-o': !item.checked, 'fa-lg': true}"></i>
 						</div>
 						<div class="listItemName">
-							<span class="listItemNameContent" linkify>{{item.name}}</span> 
+							<span class="listItemNameContent" linkify>{{item.name}} {{item.$priority}}</span> 
 							<div class="deleteButton" ng-click="deleteItem(item.ID)" ng-show="item.checked">	
 							<!-- font awesome x icon -->
 							<i class="fa fa-times-circle fa-lg"></i> 
