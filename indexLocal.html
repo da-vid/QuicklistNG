@@ -12,25 +12,26 @@
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.js"></script>
 		<script src="https://cdn.firebase.com/js/client/1.0.2/firebase.js"></script>
 		<script src="https://cdn.firebase.com/libs/angularfire/0.7.0/angularfire.min.js"></script>		
-		<script src="http://qlist.cc/js/angular-strap.min.js"></script>
+		<!-- <script src="http://qlist.cc/js/angular-strap.min.js"></script>
 		<script src="http://qlist.cc/js/angular-strap.tpl.min.js"></script>
 		<script src="http://qlist.cc/js/sortable.js"></script>
 		<script src="http://qlist.cc/js/angular-linkify.min.js"></script>
 		<script src="http://qlist.cc/js/fastclick.js"></script>
 		<script src="http://qlist.cc/js/placeholders.min.js"></script>
 		<script src="http://qlist.cc/js/quicklist.js"></script>
-		<script src="http://qlist.cc/js/idHelper.js"></script>		
-		<!-- <script src="js/angular-strap.min.js"></script>
+		<script src="http://qlist.cc/js/idHelper.js"></script>	 -->	
+		<script src="js/angular-strap.min.js"></script>
 		<script src="js/angular-strap.tpl.min.js"></script>
 		<script src="js/sortable.js"></script>
 		<script src="js/angular-linkify.min.js"></script>
 		<script src="js/fastclick.js"></script>
 		<script src="js/placeholders.min.js"></script>
-		<script src="js/quicklist.js"></script> -->
-		<script src="js/idHelper.js"></script>		
-		<!-- <script src="js/idHelperLocal.js"></script>		 -->
+		<script src="js/quicklist.js"></script>
+		<!-- <script src="js/idHelper.js"></script>		 -->
+		<script src="js/idHelperLocal.js"></script>		
 		<link rel="stylesheet" href="css/bootstrap.css">		
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="css/angular-motion.min.css">
 		<link rel="stylesheet" type="text/css" href="css/reset.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
@@ -50,7 +51,7 @@
 			<header>
 				<div class="headerMain">
 					<div class="title">
-						qList.cc <br>
+						qList<span class="cc">.cc</span> <br>
 						<span class="subtitle"> 
 						quick, easy lists.
 						</span>
@@ -81,18 +82,18 @@
 				</div>
 				<ul ui-sortable="sortableOptions" ng-model="items">
 					<li ng-class="{'listItem': true, 'checkedItem': item.checked}" ng-repeat="item in items | orderByPriority">
-						<!-- <div class="chkboxLeft" ng-click="checkItem(item)" >&nbsp;</div> -->
 						<div class="chkbox" ng-click="checkItem(item)" >
-							<!-- font awesome checkbox icons -->
 							<i ng-class="{'fa': true, 'fa-check-square-o': item.checked, 'fa-square-o': !item.checked, 'fa-lg': true}"></i>
 						</div>
 						<div class="listItemName">
 							<span class="listItemNameContent" linkify>{{item.name}}</span> 
 							<div class="deleteButton" ng-click="deleteItem(item.ID)" ng-show="item.checked">	
-							<!-- font awesome x icon -->
 							<i class="fa fa-times-circle fa-lg"></i> 
 							</span>
-						</div>					
+						</div>			
+						<div class="gripper">
+							<i class="fa fa-bars"></i> <i class="fa fa-sort"></i>
+						</div>		
 					</li>
 				</ul>
 			</div>

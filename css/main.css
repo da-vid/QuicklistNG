@@ -1,10 +1,20 @@
+/****** Fonts ******/
+
+@font-face {
+	font-family: SwanseaBold;
+	src: url("SWANSE_B.TTF");
+}
+
+@font-face {
+	font-family: Swansea;
+	src: url("SWANSE__.TTF");
+}
+
 /****** General ******/
 
-/*html, body {
-	height: 100%;
-	overflow: scroll;
-	position: relative;
-}*/
+html, body {
+	background-color: #FCF0AD;
+}
 
 a {
 	text-decoration: none;
@@ -14,7 +24,6 @@ a {
 }
 
 
-
 /****** Body ******/
 /*.viewport {
 	min-height: 100%;
@@ -22,51 +31,117 @@ a {
 	position: relative;
 }*/
 
-.main {
-	clear: both;
-	max-width: 500px;
-	min-width: 260px;
-	overflow: auto;
-	margin: auto;
-	position: absolute;
-	left: 0; right: 0;
-	background-color: white;
-	/
-}
-
 header {
-	padding: 30px 30px 0 30px;
+	/*background-color: #656045;*/
+	background-color: #484846;
+	
+	height: 35px;
+	position: relative;
 }
 
-.titleBox {
-	font-family: 'Courier New', serif;
-	font-size: x-large;
-	margin-bottom: 3px;
-	color: #444;
-	border: 0;
+.headerMain {	
+	/*clear: both;*/
+	max-width: 500px;
+	min-width: 320px;
+	margin: auto;
+	height: 85%;
+	position: absolute;
+	top:0; bottom:0; left: 0; right: 0;
 }
 
-.subscript {
-	font-size: x-small;
+.title {
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	padding: 0 .1em 0 15px;
+	display: inline-block;
+	font-size: 1.4em;
+	color: #EEE8C4;	
+	line-height: 77%;
 }
 
 .subtitle {
-	color: #ccc;
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	color: #C8C2A1;
+	font-size: .7em;
+	display: inline-block;
+}
+
+.cc {
+	color: #C8C2A1;
+	font-size: 75%;
+	line-height: 77%;
+}
+
+.floatToRight {	
+	float: right;
+}
+
+.topButtons {
+	display: inline-block;
+	padding-right: 5px;
+}
+
+.topButtons button {
+	background-color: gray;
+	display: inline-block;	
+	font-size: 1em;
+	border-radius: 10px;
+	padding: .33em 1em .33em 1em;
+	color: #484846;	
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+}
+
+.topButtons .shareButton {
+	background-color: #CCFF99;	
+}
+
+.topButtons .newButton {
+	background-color: #ADACA7;
+	/*color: #C2C1BD;*/
+}
+
+.main {
+	clear: both;
+	max-width: 500px;
+	min-width: 320px;
+	/*overflow: hidden;*/
+	margin: auto;
+	position: absolute;
+	left: 0; right: 0;
+}
+
+.listTitle {
+	margin-top: 0px;
+	padding: 8px 15px 0 15px;
+}
+
+.titleBox {
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	font-size: 140%;
+	/*margin-bottom: 3px;*/
+	color: #444;
+	background-color: #FCF0AD;
+	border: 0;
+	width: 100%;
 }
 
 /****** Form ******/
 form {
 	text-align: center;
-	margin: 10px;	
+	margin: 5px;	
 }
 
 .addItemBox {
 	border: 0px;
+	font-family: inherit;
 	font-size: large;
-	width: 65%;
+	width: 75%;
 	border-radius: 10px;
-	padding: .4em 1em .4em 1em;
-	background-color: #eee;
+	padding: 10px 10px 8px 10px;
+	background-color: #FEFAE6;
 }
 
 .addItemBox:focus {
@@ -75,11 +150,15 @@ form {
 
 .addItemButton {
 	border: 0px;
-	color: #fff;
-	padding: .3em 1em .3em 1em;
+	color: #FEFAE6;
+	padding: 10px 10px 10px 10px;
 	font-size: large;
 	border-radius: 10px;
-	background-color: #333;
+	background-color: #7E7856;
+}
+
+.addItemButton:hover, .addItemButton:active {
+	background-color: #979068;
 }
 
 /****** List ******/
@@ -92,40 +171,56 @@ form {
 
 .listItem {
 	text-align: left;
-	padding: .25em;
+	/*padding: .2em .2em .2em .2em;*/
+	border-bottom: 1px solid #E3D89C;
+	position: relative;
+	/*background-color: blue;*/
 }
 
-.checkedItem {
-	color: #ccc;
-}
 
-.checkboxLeft {
+
+/*
+.chkboxLeft {
 	display: inline-block;
 	width: 5%;
-	height: 1.2em;
-}
-
-.checkbox {
-	display: inline-block;
+	height: 100%;
 	font-size: large;
 	width: 2em;
-	height: 1.2em;
 	vertical-align: top;
+	background-color: green;
+}*/
+
+.chkbox {
+	display: inline-block;
+	font-size: large;
+	width: 2.5em;
+	height: 100%;
+	padding: .6em 1em .4em 1em;
+	text-align: center;
+	vertical-align: top;
+	z-index: 100;
+	cursor: pointer;
 }
 
 .listItemName {
 	display: inline-block;
-	font-size: large;
-	width: 70%;
+	font-size: medium;
+	width: 77%;
+	padding: .7em 0 .4em 0;
 }
 
 .listItemName a {
 	color: #666;
 }
 
-.checkedItem a {
-	color: #ccc;
+.checkedItem {
+	color: #D1C898;
 }
+
+.checkedItem a {
+	color: #D1C898;
+}
+
 
 .listItemName a:hover {
 	text-decoration: underline;
@@ -144,5 +239,91 @@ form {
 	display: inline-block;
 	color: #ebb;
 	border-radius: 5px;
-	padding: .15em;
+	padding: .1em .15em .15em .15em;
+}
+
+.gripper {
+	padding: 1em .5em .6em .5em;
+	height: 100%;
+	vertical-align: top;
+	display: inline-block;
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: #E3D89C;
+	cursor: pointer;
+}
+
+
+
+/****** Modals ******/
+
+.modal-title {
+	font-size: large;
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	margin-top: 1.2em;
+}
+
+.modal-header {
+	padding-bottom: 0;
+}
+
+.modal-header .close {
+	font-size: 300%;
+}
+
+.modal-content p {
+	font-size: medium;
+}
+
+.modal-body {
+	padding-top: 0;
+	padding-bottom: 0;
+	white-space: pre-wrap;      /* CSS3 */   
+	white-space: -moz-pre-wrap; /* Firefox */    
+	white-space: -pre-wrap;     /* Opera <7 */   
+	white-space: -o-pre-wrap;   /* Opera 7 */    
+	word-wrap: break-word;      /* IE */
+}
+
+.pageURL {
+	font-size: x-large;
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	text-align: center;
+}
+
+.modal-body .btn {
+	background-color: #7E7856;
+	color: white;
+	margin: 3px;
+	border-radius: 10px;
+}
+
+.modal-body .buttons {
+	margin: 0; padding: 0;
+	text-align: center;
+	top: -20px;
+	position: relative;
+	left: -10px;
+}
+
+.modal-body .btn:hover, .modal-body .btn:active  {
+	background-color: #979068;
+}
+
+.modal-body .btnNewList {
+	font-size: x-large;
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	border: solid 1px #E3D89C;
+	display: inline-block;
+	background-color: #CCFF99;
+	color: #444;
+	width: 70%;
+}
+
+.modal-body .btnNewList:hover {
+	background-color: #DBFFB8;
 }

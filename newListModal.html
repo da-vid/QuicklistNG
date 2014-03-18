@@ -1,0 +1,19 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="$hide()">&times;</button>
+        <h4 class="modal-title">Before you start a new list...</h4>
+      </div>
+      <div class="modal-body">
+        <p>Need to save a link to this list? Bookmark this page now, or keep a copy of this URL:</p>
+        <div class="pageURL"><a href="{{pageURL}}">{{pageDisplayURL}}</a></div>        
+        <p>OK, ready to go?</p>
+        <div class="buttons">
+          <a href="." class="btn btnNewList" ng-click="$hide()">start a new list</a>   
+          <button type="button" class="btn btnCancel" ng-click="$hide()">cancel</button>    
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

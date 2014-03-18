@@ -169,9 +169,6 @@ angular.module('ui.sortable', [])
                   });
 
                   ngModel.$modelValue.$save();
-                  // ngModel.$modelValue.splice(
-                  //   ui.item.sortable.dropindex, 0,
-                  //   ngModel.$modelValue.splice(ui.item.sortable.index, 1)[0]);
                 });
               } else {
                 // if the item was not moved, then restore the elements
