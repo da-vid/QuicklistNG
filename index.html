@@ -31,6 +31,7 @@
 		<!-- <script src="js/idHelperLocal.js"></script>		 -->
 		<link rel="stylesheet" href="css/bootstrap.css">		
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="css/angular-motion.min.css">
 		<link rel="stylesheet" type="text/css" href="css/reset.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
@@ -50,9 +51,9 @@
 			<header>
 				<div class="headerMain">
 					<div class="title">
-						qList.cc <br>
+						qList<span class="cc">.cc</span> <br>
 						<span class="subtitle"> 
-						quick, easy lists.
+						quick lists.
 						</span>
 					</div>
 					<div class="floatToRight">
@@ -66,7 +67,7 @@
 			</header>
 			<div class="main">
 				<div class="listTitle" ng-show="loaded">
-					<input name="titleBox" class="titleBox" type="text" ng-model="listName.$value" ng-change="setListName()" placeholder="{{defaultListName}}" select-on-click>
+					<input name="titleBox" class="titleBox" type="text" ng-model="listName.$value" ng-change="setListName()" placeholder="{{listNamePlaceholder}}" select-on-click>
 
 					<!-- <div class="subtitle" ng-show="getListName()==defaultProductName && loaded" ng-cloak> 
 						quick, easy lists.
@@ -81,21 +82,38 @@
 				</div>
 				<ul ui-sortable="sortableOptions" ng-model="items">
 					<li ng-class="{'listItem': true, 'checkedItem': item.checked}" ng-repeat="item in items | orderByPriority">
-						<!-- <div class="chkboxLeft" ng-click="checkItem(item)" >&nbsp;</div> -->
 						<div class="chkbox" ng-click="checkItem(item)" >
-							<!-- font awesome checkbox icons -->
 							<i ng-class="{'fa': true, 'fa-check-square-o': item.checked, 'fa-square-o': !item.checked, 'fa-lg': true}"></i>
 						</div>
 						<div class="listItemName">
-							<span class="listItemNameContent" linkify>{{item.name}}</span> 
+							<span style="color:black" class="listItemNameContent" linkify>{{item.name}}</span> 
 							<div class="deleteButton" ng-click="deleteItem(item.ID)" ng-show="item.checked">	
-							<!-- font awesome x icon -->
 							<i class="fa fa-times-circle fa-lg"></i> 
 							</span>
-						</div>					
+						</div>			
+						<div class="gripper">
+							<i class="fa fa-bars"></i> <!-- <i class="fa fa-sort"></i> -->
+						</div>		
 					</li>
 				</ul>
 			</div>
+			<footer>
+				<div class="footerWidthLimit">
+					<div class="footerLeft">
+							<ul>
+								<li><a href="#">Advertising</a></li>
+								<li><a href="#">Business</a></li>
+								<li><a href="#">About</a></li>
+							</ul>
+					</div>
+					<div class="footerRight">
+							<ul>
+								<li><a href="#"><span class="attention">New</span> Privacy &amp; Terms</a></li>
+								<li><a href="#">Settings</a></li>
+							</ul>
+					</div>
+				</div>
+			</footer>
 		</div>
 	</body>
 </html>

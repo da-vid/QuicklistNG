@@ -47,56 +47,67 @@
 </script>
 	</head>
 	<body>
-		<div class="viewport">
-			<header>
-				<div class="headerMain">
-					<div class="title">
-						qList<span class="cc">.cc</span> <br>
-						<span class="subtitle"> 
-						quick, easy lists.
-						</span>
-					</div>
-					<div class="floatToRight">
-						<div class="topButtons">
-							<button type="button" class="btn btn-sm newButton" ng-click="showNewListModal()">new list</button>
-							<!-- <button type="button" class="btn btn-sm shareButton" data-animation="am-fade-and-slide-top" data-template="shareModal.html" bs-modal="modal">share your list</button> -->
-							<button type="button" class="btn btn-sm shareButton" ng-click="showShareModal()">share your list</button>
-						</div>
-					</div>
-				</div>
-			</header>
-			<div class="main">
-				<div class="listTitle" ng-show="loaded">
-					<input name="titleBox" class="titleBox" type="text" ng-model="listName.$value" ng-change="setListName()" placeholder="{{defaultListName}}" select-on-click>
-
-					<!-- <div class="subtitle" ng-show="getListName()==defaultProductName && loaded" ng-cloak> 
-						quick, easy lists.
-					</div> -->
-				</div>
-				<form name="addItemForm" ng-submit="addItem()" ng-show="loaded">
-					<input name="addItemBox" class="addItemBox" type="text" required ng-model="itemName" placeholder="{{fbCount(items) && 'enter your next item' || 'enter your first item here'}}" ng-pattern="moreThanWhitespace" />
-					<input class="addItemButton" type="submit" value="add" />
-				</form>
-				<div class="spinner" ng-hide="loaded">
-					<i class="fa fa-spinner fa-spin fa-3x"></i>					
-				</div>
-				<ul ui-sortable="sortableOptions" ng-model="items">
-					<li ng-class="{'listItem': true, 'checkedItem': item.checked}" ng-repeat="item in items | orderByPriority">
-						<div class="chkbox" ng-click="checkItem(item)" >
-							<i ng-class="{'fa': true, 'fa-check-square-o': item.checked, 'fa-square-o': !item.checked, 'fa-lg': true}"></i>
-						</div>
-						<div class="listItemName">
-							<span class="listItemNameContent" linkify>{{item.name}}</span> 
-							<div class="deleteButton" ng-click="deleteItem(item.ID)" ng-show="item.checked">	
-							<i class="fa fa-times-circle fa-lg"></i> 
+		<div class="aboveTheFooterOuter">
+			<div class="aboveTheFooterInner">
+				<header>
+					<div class="headerMain">
+						<div class="title">
+							qList<span class="cc">.cc</span> <br>
+							<span class="subtitle"> 
+							quick, easy lists.
 							</span>
-						</div>			
-						<div class="gripper">
-							<i class="fa fa-bars"></i> <i class="fa fa-sort"></i>
-						</div>		
-					</li>
-				</ul>
+						</div>
+						<div class="floatToRight">
+							<div class="topButtons">
+								<button type="button" class="btn btn-sm newButton" ng-click="showNewListModal()">new list</button>
+								<button type="button" class="btn btn-sm shareButton" ng-click="showShareModal()">share your list</button>
+							</div>
+						</div>
+					</div>
+				</header>
+				<div class="main">
+					<div class="listTitle" ng-show="loaded">
+						<input name="titleBox" ng-class="{'titleBox':true, 'titleBoxFilled':listName.$value.length, 'titleBoxNotFocused':!listNameFocused}" type="text" ng-model="listName.$value" ng-blur="titleBoxBlur()" ng-focus="titleBoxFocus()" placeholder="{{listNamePlaceholder}}" select-on-click>
+					</div>
+					<form name="addItemForm" ng-submit="addItem()" ng-show="loaded">
+						<input name="addItemBox" class="addItemBox" type="text" required ng-model="itemName" placeholder="{{fbCount(items) && 'enter your next item' || 'enter your first item here'}}" ng-pattern="moreThanWhitespace" />
+						<input class="addItemButton" type="submit" value="add" />
+					</form>
+					<div class="spinner" ng-hide="loaded">
+						<i class="fa fa-spinner fa-spin fa-3x"></i>					
+					</div>
+					<ul ui-sortable="sortableOptions" ng-model="items">
+						<li ng-class="{'listItem': true, 'checkedItem': item.checked}" ng-repeat="item in items | orderByPriority">
+							<div class="chkbox" ng-click="checkItem(item)" >
+								<i ng-class="{'fa': true, 'fa-check-square-o': item.checked, 'fa-square-o': !item.checked, 'fa-lg': true}"></i>
+							</div>
+							<div class="listItemName">
+								<span class="listItemNameContent" linkify>{{item.name}}</span> 
+								<div class="deleteButton" ng-click="deleteItem(item.ID)" ng-show="item.checked">	
+								<i class="fa fa-times-circle fa-lg"></i> 
+								</span>
+							</div>			
+							<div class="gripper">
+								<i class="fa fa-bars"></i> <!-- <i class="fa fa-sort"></i>  -->
+							</div>		
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
+		<footer>
+			<div class="footerWidthLimit">
+				<div class="footerLeft">
+						<ul>
+							<li><a href="#">Feedback &amp; Support</a></li>
+						</ul>
+				</div>
+				<div class="footerRight">
+						<ul>
+							<li><a href="#">Terms &amp; Privacy</a></li>
+						</ul>
+				</div>
+			</div>
+		</footer>		
 	</body>
 </html>

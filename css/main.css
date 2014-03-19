@@ -14,6 +14,7 @@
 
 html, body {
 	background-color: #FCF0AD;
+	height: 100%;
 }
 
 a {
@@ -33,9 +34,8 @@ a {
 
 header {
 	/*background-color: #656045;*/
-	background-color: #484846;
-	
-	height: 35px;
+	background-color: #484846;	
+	height: 2.7em;
 	position: relative;
 }
 
@@ -97,24 +97,31 @@ header {
 	background-color: #CCFF99;	
 }
 
+.topButtons .shareButton:hover, 
+.topButtons .shareButton:active {
+	background-color: #DBFFB8;	
+}
+
 .topButtons .newButton {
 	background-color: #ADACA7;
-	/*color: #C2C1BD;*/
+}
+
+.topButtons .newButton:hover, 
+.topButtons .newButton:active {
+	background-color: #BDBDB9;	
 }
 
 .main {
 	clear: both;
 	max-width: 500px;
 	min-width: 320px;
-	/*overflow: hidden;*/
 	margin: auto;
-	position: absolute;
-	left: 0; right: 0;
+	margin-bottom: 15px;
 }
 
 .listTitle {
-	margin-top: 0px;
-	padding: 8px 15px 0 15px;
+	margin-top: .3em;
+	padding: .1em 1em .1em 1em;
 }
 
 .titleBox {
@@ -124,8 +131,31 @@ header {
 	/*margin-bottom: 3px;*/
 	color: #444;
 	background-color: #FCF0AD;
-	border: 0;
+	/*border: 0;*/
+	border: 1px solid #E3D89C;
+	border-radius: 10px;
+	padding: .1em .6em .1em .6em;
 	width: 100%;
+}
+
+.titleBoxFilled {
+	border: 0;
+}
+
+.titleBoxNotFocused::-webkit-input-placeholder {
+   color: #444;
+}
+
+.titleBoxNotFocused:-moz-placeholder { /* Firefox 18- */
+   color: #444;  
+}
+
+.titleBoxNotFocused::-moz-placeholder {  /* Firefox 19+ */
+   color: #444;  
+}
+
+.titleBoxNotFocused:-ms-input-placeholder {  
+   color: #444;  
 }
 
 /****** Form ******/
@@ -135,7 +165,7 @@ form {
 }
 
 .addItemBox {
-	border: 0px;
+	border: 0;
 	font-family: inherit;
 	font-size: large;
 	width: 75%;
@@ -161,34 +191,30 @@ form {
 	background-color: #979068;
 }
 
+/* Medium screens (640px) */
+@media (min-width: 640px) and (min-height: 700px) { 
+	.title { font-size: 180%; }
+	.subtitle { font-size: 60%; }
+	header { height: 3.5em; }
+	.listTitle { margin-top: .6em; }
+	.topButtons { font-size: 120%; }
+	.topButtons button { height: 2.45em }
+	.titleBox { font-size: 180%; }
+}
+
 /****** List ******/
 
 .spinner {
 	text-align: center;
 	padding: 40px;
-	color: #ccc;
+	color: #E3D89C;
 }
 
 .listItem {
 	text-align: left;
-	/*padding: .2em .2em .2em .2em;*/
 	border-bottom: 1px solid #E3D89C;
 	position: relative;
-	/*background-color: blue;*/
 }
-
-
-
-/*
-.chkboxLeft {
-	display: inline-block;
-	width: 5%;
-	height: 100%;
-	font-size: large;
-	width: 2em;
-	vertical-align: top;
-	background-color: green;
-}*/
 
 .chkbox {
 	display: inline-block;
@@ -210,7 +236,7 @@ form {
 }
 
 .listItemName a {
-	color: #666;
+	color: #7E7856;
 }
 
 .checkedItem {
@@ -243,7 +269,7 @@ form {
 }
 
 .gripper {
-	padding: 1em .5em .6em .5em;
+	padding: 1em 1em .6em 1em;
 	height: 100%;
 	vertical-align: top;
 	display: inline-block;
@@ -324,6 +350,65 @@ form {
 	width: 70%;
 }
 
-.modal-body .btnNewList:hover {
+.modal-body .btnNewList:hover, .modal-body .btnNewList:active {
 	background-color: #DBFFB8;
 }
+
+/****** Footer ******/
+.aboveTheFooterOuter {
+	min-height: 100%;
+}
+
+.aboveTheFooterInner {
+	overflow: auto;
+	padding-bottom: 40px;
+}
+
+footer {	
+	color: #7E7856;
+	margin-top: -40px;
+	border: 0;
+	position: relative;
+	clear: both;
+	height: 40px;
+	width: 100%;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.footerWidthLimit {
+	max-width: 500px;
+	min-width: 320px;
+	margin: auto;
+}
+
+footer a{
+	color: #A7A07A;	
+	height: 40px;
+	padding: 10px;
+	vertical-align: middle;
+}
+
+footer a:hover{
+	color: #A7A07A;	
+}
+
+.footerLeft, .footerRight {
+	position: relative;
+	bottom: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.footerRight ul {
+	float: right;
+}
+
+footer ul li {
+	float: left;
+	padding: 10px;
+}
+
+

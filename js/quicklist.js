@@ -42,7 +42,10 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
             //form validation pattern: http://stackoverflow.com/a/18747273
             $scope.moreThanWhitespace = /\S/;
             $scope.defaultPageTitle = "qList.cc | quick lists";
-            $scope.defaultListName = "my list";
+            $scope.listNameFocused = false;
+            var defaultListName = "my qList";
+            var focusedListName = "name your list here";
+            $scope.listNamePlaceholder = defaultListName;
             $scope.pageURL = document.location.href;
             $scope.pageDisplayURL = document.location.hostname + document.location.pathname;
 
@@ -89,6 +92,17 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
                 if(!$scope.listName.$value) 
                     return $scope.defaultPageTitle;
                 return $scope.listName.$value;
+            };
+
+            $scope.titleBoxFocus = function() {  
+                $scope.listNamePlaceholder = focusedListName; 
+                $scope.listNameFocused = true;
+            };
+
+            $scope.titleBoxBlur = function() {      
+                $scope.listNamePlaceholder = defaultListName;  
+                $scope.listNameFocused = false;         
+                setListName();
             };
 
             $scope.setListName = function() {                
