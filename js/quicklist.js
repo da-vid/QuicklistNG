@@ -6,10 +6,6 @@ if(window.addEventListener)
     }, false);
 }
 
-// Include the UserVoice JavaScript SDK (only needed once on a page)
-// UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/u1GJpFhXkOuP8Oq71GJCRw.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
-
-
 angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStrap", "ngAnimate"])
 
     .factory("listName", ["$firebase", function($firebase) {
@@ -59,7 +55,6 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
             var deleteAllModal = $modal({scope: $scope, template: 'deleteAllModal.html', animation:'am-fade-and-slide-top', show: false});
             var tosModal = $modal({scope: $scope, template: 'tosModal.html', animation:'am-fade-and-slide-top', show: false});
 
-            //form validation pattern: http://stackoverflow.com/a/18747273
             $scope.moreThanWhitespace = /\S/;
             $scope.defaultPageTitle = "qList.cc | quick lists";
             $scope.listNameFocused = false;
@@ -175,7 +170,6 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
                 var maxItemID = 0;
                 var keys = $scope.items.$getIndex();
 
-                //https://www.firebase.com/docs/angular/reference.html#getindex
                 keys.forEach(function (key, i) {
                     if($scope.items[key].ID > maxItemID) {
                         maxItemID = $scope.items[key].ID;
