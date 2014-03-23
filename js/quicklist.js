@@ -1,9 +1,16 @@
 
-window.addEventListener('load', function() {
-    FastClick.attach(document.body);
-}, false);
+if(window.addEventListener)
+{
+    window.addEventListener('load', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
 
-angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStrap"])
+// Include the UserVoice JavaScript SDK (only needed once on a page)
+// UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/u1GJpFhXkOuP8Oq71GJCRw.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+
+
+angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStrap", "ngAnimate"])
 
     .factory("listName", ["$firebase", function($firebase) {
         var ref = new Firebase("https://qwiklist.firebaseio.com/listAttrs/" + getListID() + "/listName");
@@ -25,19 +32,32 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
             $scope.loaded = false;
             $scope.title = "blah";
             $scope.content ="contentblah";
+            $scope.checkedItemExists = false;
 
             //Handle timeouts
             var timeOut = 10800000; //in milliseconds: three hours
             var timeOutID = setTimeout(goOffline, timeOut);
             $scope.offline = false;
 
-            document.addEventListener('keydown', stuffIsHappening);
-            document.addEventListener('mousedown', stuffIsHappening);
-            document.addEventListener('mousemove', stuffIsHappening);            
-            document.addEventListener('touchstart', stuffIsHappening);
+            if(!document.addEventListener)
+            {
+                document.attachEvent('keydown', stuffIsHappening);
+                document.attachEvent('mousedown', stuffIsHappening);
+                document.attachEvent('mousemove', stuffIsHappening);            
+                document.attachEvent('touchstart', stuffIsHappening);
+            } 
+            else
+            {
+                document.addEventListener('keydown', stuffIsHappening);
+                document.addEventListener('mousedown', stuffIsHappening);
+                document.addEventListener('mousemove', stuffIsHappening);            
+                document.addEventListener('touchstart', stuffIsHappening);
+            }
 
             var shareModal = $modal({scope: $scope, template: 'shareModal.html', animation:'am-fade-and-slide-top', show: false});
             var newListModal = $modal({scope: $scope, template: 'newListModal.html', animation:'am-fade-and-slide-top', show: false});
+            var deleteAllModal = $modal({scope: $scope, template: 'deleteAllModal.html', animation:'am-fade-and-slide-top', show: false});
+            var tosModal = $modal({scope: $scope, template: 'tosModal.html', animation:'am-fade-and-slide-top', show: false});
 
             //form validation pattern: http://stackoverflow.com/a/18747273
             $scope.moreThanWhitespace = /\S/;
@@ -54,7 +74,8 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
                     stuffIsHappening();
                 },
                 handle: ".gripper",
-                disabled: false
+                disabled: false,
+                containment: ".main"
             };
 
             $scope.addItem = function() {                
@@ -74,7 +95,20 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
                         $scope.items.$remove(key); 
                     }
                 });                   
-                setLastMod();             
+                setLastMod();       
+                evaluateCheckedItemExists();      
+            };
+
+            $scope.deleteAllChecked = function() {                
+                stuffIsHappening();
+                var keys = $scope.items.$getIndex();
+                keys.forEach(function (key, i) {
+                    if($scope.items[key].checked) {
+                        $scope.items.$remove(key); 
+                    }
+                });                   
+                setLastMod();
+                $scope.checkedItemExists = false;        
             };
 
             $scope.checkItem = function(item) {                
@@ -82,10 +116,12 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
                 item.checked = !item.checked;
                 $scope.items.$save();                     
                 setLastMod();
+                evaluateCheckedItemExists();
             };
 
             $scope.items.$on("loaded", function() {
                 $scope.loaded = true;
+                setTimeout(evaluateCheckedItemExistsFirstTime, 500);
             });
 
             $scope.getListName = function() {
@@ -105,11 +141,11 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
                 setListName();
             };
 
-            $scope.setListName = function() {                
+             function setListName() {                
                 stuffIsHappening();
                 $scope.listName.$set($scope.listName.$value);                 
                 setLastMod();
-            };
+            }
 
             function stuffIsHappening() {
                 if($scope.offline) { 
@@ -160,6 +196,22 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
                 return maxPriority + 1;
             };
 
+            function evaluateCheckedItemExists() {
+                var exists = false;
+                var keys = $scope.items.$getIndex();
+                keys.forEach(function (key, i) {
+                    if($scope.items[key].checked) {
+                        exists = true;
+                    }
+                });
+                $scope.checkedItemExists = exists;
+            }
+
+            function evaluateCheckedItemExistsFirstTime() {
+                evaluateCheckedItemExists();
+                $scope.$apply();
+            }
+
             $scope.fbCount = function(list) {
                 var count = 0;
                 var keys = list.$getIndex();
@@ -173,17 +225,12 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
             $scope.showShareModal = function () {
                 shareModal.$promise.then(function() {
                     shareModal.show();
-                    // // // document.getElementById("pageBox").focus();
-                    //  if (document.selection) {
-                    //     var range = document.body.createTextRange();
-                    //     range.moveToElementText(document.getElementById("pageBox"));
-                    //     range.select();
-                    //  } else /*if (window.getSelection())*/ {
-                    //     var range = document.createRange();
-                    //     range.selectNode(document.getElementById("pageBox"));
-                    //     window.getSelection().removeAllRanges();
-                    //     window.getSelection().addRange(range);
-                    //  }
+                });
+            };
+
+            $scope.showDeleteAllModal = function () {
+                deleteAllModal.$promise.then(function() {
+                    deleteAllModal.show();
                 });
             };
 
@@ -191,25 +238,16 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
                 $scope.showModal(newListModal);
             };
 
+            $scope.showTosModal = function() {
+                $scope.showModal(tosModal);
+            };
+
             $scope.showModal = function (modalObj) {
                 modalObj.$promise.then(function() {
                     modalObj.show();
                 });
             };
-
-
-            // $scope.sharePopover = {
-            //   "title": "Share things",
-            //   "content": "Share it!"
-            // };
-
-            // $scope.newPopover = {
-            //   "title": "New List",
-            //   "content": "Remember to save your list URL!"
-            // };
         }
-
-
     ])
 
     .directive('selectOnClick', function () {

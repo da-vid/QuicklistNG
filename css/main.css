@@ -24,6 +24,16 @@ a {
 	font-size: inherit;
 }
 
+strong {
+	font-family: SwanseaBold, sans-serif;	
+	font-size: inherit;
+}
+
+h1 {
+	font-family: SwanseaBold, sans-serif;	
+	font-size: 120%;
+}
+
 
 /****** Body ******/
 /*.viewport {
@@ -32,7 +42,7 @@ a {
 	position: relative;
 }*/
 
-header {
+.header {
 	/*background-color: #656045;*/
 	background-color: #484846;	
 	height: 2.7em;
@@ -44,9 +54,10 @@ header {
 	max-width: 500px;
 	min-width: 320px;
 	margin: auto;
-	height: 85%;
+	padding-top: 3px;
+	/*height: 85%;
 	position: absolute;
-	top:0; bottom:0; left: 0; right: 0;
+	top:0; bottom:0; left: 0; right: 0;*/
 }
 
 .title {
@@ -195,7 +206,8 @@ form {
 @media (min-width: 640px) and (min-height: 700px) { 
 	.title { font-size: 180%; }
 	.subtitle { font-size: 60%; }
-	header { height: 3.5em; }
+	.header { height: 3.5em; }
+	.headerMain {padding-top: 4px;}
 	.listTitle { margin-top: .6em; }
 	.topButtons { font-size: 120%; }
 	.topButtons button { height: 2.45em }
@@ -268,6 +280,10 @@ form {
 	padding: .1em .15em .15em .15em;
 }
 
+.deleteButton:hover, .deleteButton:active {
+	color: #D69999;
+}
+
 .gripper {
 	padding: 1em 1em .6em 1em;
 	height: 100%;
@@ -323,7 +339,8 @@ form {
 .modal-body .btn {
 	background-color: #7E7856;
 	color: white;
-	margin: 3px;
+	margin: auto;
+	margin-top: 5px;
 	border-radius: 10px;
 }
 
@@ -332,7 +349,7 @@ form {
 	text-align: center;
 	top: -20px;
 	position: relative;
-	left: -10px;
+	left: -5px;
 }
 
 .modal-body .btn:hover, .modal-body .btn:active  {
@@ -350,8 +367,18 @@ form {
 	width: 70%;
 }
 
-.modal-body .btnNewList:hover, .modal-body .btnNewList:active {
-	background-color: #DBFFB8;
+.modal-body .btnDeleteAll {
+	font-size: large;
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	border: solid 1px #E3D89C;
+	display: block;
+	background-color: #F3CFCF;
+	color: #444;
+}
+
+.modal-body .btnDeleteAll:hover, .modal-body .btnDeleteAll:active {
+	background-color: #ebb;
 }
 
 /****** Footer ******/
@@ -360,7 +387,7 @@ form {
 }
 
 .aboveTheFooterInner {
-	overflow: auto;
+	/*overflow: auto;*/
 	padding-bottom: 40px;
 }
 
@@ -391,7 +418,37 @@ footer a{
 	vertical-align: middle;
 }
 
-footer a:hover{
+footer .btnDelete {
+	background-color: #F3CFCF;
+	color: #7E7856;
+	border-radius: 10px;
+}
+
+footer .btnDelete:hover {
+	text-decoration: none;
+	color: #7E7856;
+	background-color: #ebb;
+}
+
+.animate-show, .animate-hide {
+  -webkit-transition:all linear .3s;
+  -moz-transition:all linear .3s;
+  -ms-transition:all linear .3s;
+  -o-transition:all linear .3s;
+  transition:all linear .3s;
+}
+
+.animate-show.ng-hide-add,
+.animate-show.ng-hide-remove {
+ 	display:block!important;
+}
+
+.animate-show.ng-hide {
+	opacity:0;
+}
+
+
+footer a:hover {
 	color: #A7A07A;	
 }
 
