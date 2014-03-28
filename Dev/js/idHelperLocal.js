@@ -32,6 +32,6 @@ function getListID() {
         return qs.i;
     }
     else {
-        window.location.href = "index.html?i="+makeID();
+        window.location.href = "indexLocal.html?i="+makeID();
     }
 }

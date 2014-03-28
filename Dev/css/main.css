@@ -132,7 +132,7 @@ h1 {
 
 .listTitle {
 	margin-top: .3em;
-	padding: .1em 1em .1em 1em;
+	padding: 0 1em 0 1em;
 }
 
 .titleBox {
@@ -147,6 +147,14 @@ h1 {
 	border-radius: 10px;
 	padding: .1em .6em .1em .6em;
 	width: 100%;
+	height: 1.4em;
+	-webkit-appearance: none;
+}
+
+.titleBox:focus {
+	outline: none;
+	border: 1px solid #E3D89C;
+	border-radius: 10px;
 }
 
 .titleBoxFilled {
@@ -203,7 +211,7 @@ form {
 }
 
 /* Medium screens (640px) */
-@media (min-width: 640px) and (min-height: 700px) { 
+@media (min-width: 525px) and (min-height: 640px) { 
 	.title { font-size: 180%; }
 	.subtitle { font-size: 60%; }
 	.header { height: 3.5em; }
@@ -233,7 +241,7 @@ form {
 	font-size: large;
 	width: 2.5em;
 	height: 100%;
-	padding: .6em 1em .4em 1em;
+	padding: .5em 1em .4em 1em;
 	text-align: center;
 	vertical-align: top;
 	z-index: 100;
@@ -244,7 +252,7 @@ form {
 	display: inline-block;
 	font-size: medium;
 	width: 77%;
-	padding: .7em 0 .4em 0;
+	padding: .6em 0 .6em 0;
 }
 
 .listItemName a {
@@ -263,6 +271,7 @@ form {
 .listItemName a:hover {
 	text-decoration: underline;
 }
+
 .listItemNameContent {
 	font-size: inherit;
 	white-space: pre-wrap;      /* CSS3 */   
@@ -277,7 +286,7 @@ form {
 	display: inline-block;
 	color: #ebb;
 	border-radius: 5px;
-	padding: .1em .15em .15em .15em;
+	padding: .2em .15em .15em .15em;
 }
 
 .deleteButton:hover, .deleteButton:active {
@@ -285,7 +294,7 @@ form {
 }
 
 .gripper {
-	padding: 1em 1em .6em 1em;
+	padding: .9em 1em .6em 1em;
 	height: 100%;
 	vertical-align: top;
 	display: inline-block;
@@ -296,9 +305,94 @@ form {
 	cursor: pointer;
 }
 
+.fa-sort {
+	display: none;
+}
 
+.gripper:hover .fa-sort,
+.gripper:active .fa-sort {
+	display: inline-block;
+}
+
+/* Medium screens (640px) */
+@media (min-width: 525px) and (min-height: 640px) { 
+	.listItemName {
+		font-size: 140%;
+		padding: .65em 0 .5em 0;
+	}
+	.chkbox {
+		font-size: 150%;
+		padding: .5em 1em .5em 1em;
+	}
+	.fa-bars, .fa-sort {font-size: 110%;}
+}
+
+/****** Instructions ******/
+.instructions {	
+	width: 90%;
+	margin: .9em auto 0 auto;
+	padding: 1em;
+	background-color: #FDF4C6;
+	border-radius: 10px;
+}
+
+.instructionsHeader{
+	font-size: 120%;
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	text-align: center;
+	margin-bottom: .1em;
+
+}
+
+.instructionsIcon{
+	text-align: center;
+	margin-bottom: .2em;
+	color: #B0A879;
+}
+
+.instructionsBody {
+	font-size: 100%;
+	font-family: 'Lato', sans-serif;
+	width: 100%;
+	margin: 0 auto 1em auto;
+	text-align: center;
+}
+
+/* Medium screens (640px) */
+@media (min-width: 525px) and (min-height: 640px) { 
+	.instructions {	
+		width: 80%;
+		margin: 1.5em auto 0 auto;
+		padding: 2em 2em .1em 2em;
+	}
+
+	.instructionsIcon {
+		font-size: 130%;
+		text-align: center;
+		margin-bottom: .3em;
+	}
+
+	.instructionsHeader {
+		font-size: 150%;
+		margin-bottom: .3em;
+	}
+
+
+	.instructionsBody {
+		font-size: 120%;
+		font-family: 'Lato', sans-serif;
+		width: 100%;
+		margin: 0 auto 2em auto;
+		text-align: center;
+	}
+}
 
 /****** Modals ******/
+
+.modal {
+	overflow-y: auto;
+}
 
 .modal-title {
 	font-size: large;
@@ -308,7 +402,8 @@ form {
 }
 
 .modal-header {
-	padding-bottom: 0;
+	padding-bottom: 10px;
+	min-height: 50px;
 }
 
 .modal-header .close {
@@ -317,16 +412,25 @@ form {
 
 .modal-content p {
 	font-size: medium;
+	padding: .5em 0 .5em 0;
+}
+
+.modal-content h1 {
+	padding: 1em 0 0 0;
+}
+
+.modal-text {
+	padding: 20px 0 20px 0;
+	font-size: 120%;
+}
+
+.centered-top {
+	text-align: center;
+	padding-top: 0;
 }
 
 .modal-body {
-	padding-top: 0;
-	padding-bottom: 0;
-	white-space: pre-wrap;      /* CSS3 */   
-	white-space: -moz-pre-wrap; /* Firefox */    
-	white-space: -pre-wrap;     /* Opera <7 */   
-	white-space: -o-pre-wrap;   /* Opera 7 */    
-	word-wrap: break-word;      /* IE */
+	padding: 0 20px 20px 20px;
 }
 
 .pageURL {
@@ -334,22 +438,23 @@ form {
 	font-family: 'Lato', sans-serif;
 	font-weight: 700;
 	text-align: center;
+	white-space: pre-wrap;
 }
 
 .modal-body .btn {
 	background-color: #7E7856;
 	color: white;
 	margin: auto;
-	margin-top: 5px;
+	margin-top: 10px;
 	border-radius: 10px;
+	display: block;
 }
 
 .modal-body .buttons {
-	margin: 0; padding: 0;
+	margin: auto; 
+	padding: 0;
 	text-align: center;
-	top: -20px;
 	position: relative;
-	left: -5px;
 }
 
 .modal-body .btn:hover, .modal-body .btn:active  {
@@ -367,8 +472,13 @@ form {
 	width: 70%;
 }
 
+.modal-body .btnNewList:hover, 
+.modal-body .btnNewList:active {
+	background-color: #DBFFB8;	
+}
+
 .modal-body .btnDeleteAll {
-	font-size: large;
+	font-size: x-large;
 	font-family: 'Lato', sans-serif;
 	font-weight: 700;
 	border: solid 1px #E3D89C;
@@ -393,7 +503,8 @@ form {
 
 footer {	
 	color: #7E7856;
-	margin-top: -40px;
+	margin-top: -50px;
+	margin-bottom: 10px;
 	border: 0;
 	position: relative;
 	clear: both;
@@ -447,7 +558,6 @@ footer .btnDelete:hover {
 	opacity:0;
 }
 
-
 footer a:hover {
 	color: #A7A07A;	
 }
@@ -455,7 +565,6 @@ footer a:hover {
 .footerLeft, .footerRight {
 	position: relative;
 	bottom: 0px;
-	padding-left: 10px;
 	padding-right: 10px;
 }
 

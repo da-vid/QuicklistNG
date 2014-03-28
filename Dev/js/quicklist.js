@@ -115,9 +115,20 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
             };
 
             $scope.items.$on("loaded", function() {
-                $scope.loaded = true;
-                setTimeout(evaluateCheckedItemExistsFirstTime, 500);
+                // $scope.loaded = true;
+                setTimeout(pageIsLoaded, 300);
             });
+
+            // function evaluateCheckedItemExistsFirstTime() {
+            //     evaluateCheckedItemExists();
+            //     $scope.$apply();
+            // }
+
+            function pageIsLoaded() {
+                $scope.loaded = true;
+                evaluateCheckedItemExists();
+                $scope.$apply();
+            }
 
             $scope.getListName = function() {
                 if(!$scope.listName.$value) 
