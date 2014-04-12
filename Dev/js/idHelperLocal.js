@@ -28,10 +28,39 @@ function getQS()
 
 function getListID() {    
     var qs = getQS();
-    if(qs.i) {
+    if (qs.i === "new") {
+        window.location.href = "indexLocal.html?i="+makeID();  
+    }
+    else if(qs.i) {
+        setCookie("lastList", qs.i, 60);
         return qs.i;
-    }
+    }    
     else {
-        window.location.href = "indexLocal.html?i="+makeID();
+        var lastList = getCookie("lastList");
+        if (lastList === "") {            
+            window.location.href = "indexLocal.html?i="+makeID();          
+        }
+        else {
+            window.location.href = "indexLocal.html?i="+lastList; 
+        }
     }
+}
+
+function setCookie(cname,cvalue,exdays)
+{
+    var d = new Date();
+    d.setTime(d.getTime()+(exdays*24*60*60*1000));
+    var expires = "expires="+d.toGMTString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function getCookie(cname)
+{
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name)===0) return c.substring(name.length,c.length);
+    }
+    return "";
 }

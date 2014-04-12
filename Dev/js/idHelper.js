@@ -23,10 +23,39 @@ function getID()
 
 function getListID() {    
     var id = getID();
-    if(id) {
+    if (id === "new") {
+        window.location.href = makeID();  
+    }
+    else if(id) {        
+        setCookie("lastList", id, 60);
         return id;
     }
     else {
-        window.location.href = makeID();
+        var lastList = getCookie("lastList");
+        if (lastList === "") {            
+            window.location.href = makeID();            
+        }
+        else {
+            window.location.href = lastList; 
+        }
     }
+}
+
+function setCookie(cname,cvalue,exdays)
+{
+    var d = new Date();
+    d.setTime(d.getTime()+(exdays*24*60*60*1000));
+    var expires = "expires="+d.toGMTString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function getCookie(cname)
+{
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name)===0) return c.substring(name.length,c.length);
+    }
+    return "";
 }
