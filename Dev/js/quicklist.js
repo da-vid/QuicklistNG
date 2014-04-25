@@ -80,6 +80,7 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
                 }
                 $scope.itemName = "";                
                 setLastMod();
+                ga('send', 'event', 'listEvent', 'addItem');
             };
 
             $scope.deleteItem = function(itemID) {                
@@ -91,6 +92,7 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
                     }
                 });                   
                 setLastMod();       
+                ga('send', 'event', 'listEvent', 'delItem');
                 evaluateCheckedItemExists();      
             };
 
@@ -103,7 +105,8 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
                     }
                 });                   
                 setLastMod();
-                $scope.checkedItemExists = false;        
+                ga('send', 'event', 'listEvent', 'delAllItems');
+                $scope.checkedItemExists = false;                        
             };
 
             $scope.checkItem = function(item) {                
@@ -111,6 +114,7 @@ angular.module("quicklist", ["firebase", "linkify", "ui.sortable", "mgcrea.ngStr
                 item.checked = !item.checked;
                 $scope.items.$save();                     
                 setLastMod();
+                ga('send', 'event', 'listEvent', 'checkItem');
                 evaluateCheckedItemExists();
             };
 
